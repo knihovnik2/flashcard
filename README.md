@@ -1,4 +1,4 @@
-a flashcard app running in the command line
+a flashcard app running in the command line.
 do whatever you want with it
 
 the input files always follow this structure:
