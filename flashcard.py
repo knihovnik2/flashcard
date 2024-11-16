@@ -68,13 +68,8 @@ def choice(file_name):
     start = time.time()
     for i in range(len(cards)):
         current = cards.pop(ri(0,len(cards)-1))
-
-        """if current[0][-1] == "?":
-            answer = input(f"{current[0]} ")
-        else:
-            answer = input(f"{current[0]}: ")"""
         
-        letters = "abcdefghij"
+        letters = config["quiz_option_markers"]
 
         print(current[1])
         for i in range(int(current[0])):
@@ -82,11 +77,11 @@ def choice(file_name):
         
         answer = input("Answer: ")
 
-        if answer.lower() == current[-1].lower():
+        if answer.lower() == letters[int(current[-1])]:
             print(f"{Fore.GREEN}correct!{Style.RESET_ALL}")
             stats["correct"] += 1
         else:
-            print(f"{Fore.RED}wrong :({Style.RESET_ALL} the correct answer was {Fore.CYAN}{current[-1]}){Style.RESET_ALL}")
+            print(f"{Fore.RED}wrong :({Style.RESET_ALL} the correct answer was {Fore.CYAN}{letters[int(current[-1])]}){Style.RESET_ALL}")
     
     print(f"{Fore.MAGENTA}Score:{Style.RESET_ALL} {stats["correct"]}/{stats["total"]} {round(stats["correct"]/stats["total"]*100,2)}% {round(time.time()-start, 2)} s")
 
@@ -103,6 +98,14 @@ def main():
     
     # Parse the arguments
     args = parser.parse_args()
+
+    # Load config
+    config_file = open(f"{os.path.dirname(os.path.abspath(__file__))}/flashcard.config")
+    config_read = [i for i in config_file]
+    global config
+    config = {}
+    for i in config_read:
+        config[i.split("=")[0]] = i.split("=")[1]
     
     # Handle the command
     if args.command == "practice":
