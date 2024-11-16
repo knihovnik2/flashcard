@@ -3,9 +3,10 @@ import argparse
 from colorama import Fore, Back, Style
 import time
 from random import randint as ri
+import os
 
 def practice(file_name):
-    f = open(f"/home/lukas/Apps/Flashcard/{file_name}.txt")
+    f = open(f"{os.path.dirname(os.path.abspath(__file__))}/files/{file_name}.txt")
     entry = ""
     for i in f:
         for j in i:
@@ -48,7 +49,7 @@ def practice(file_name):
     print(f"{Fore.MAGENTA}Score:{Style.RESET_ALL} {stats["correct"]}/{stats["total"]} {round(stats["correct"]/stats["total"]*100,2)}% {round(time.time()-start, 2)} s")
 
 def choice(file_name):
-    f = open(f"/home/lukas/Apps/Flashcard/{file_name}.txt")
+    f = open(f"{os.path.dirname(os.path.abspath(__file__))}/files/{file_name}.txt")
     entry = ""
     for i in f:
         for j in i:
@@ -89,8 +90,7 @@ def choice(file_name):
     
     print(f"{Fore.MAGENTA}Score:{Style.RESET_ALL} {stats["correct"]}/{stats["total"]} {round(stats["correct"]/stats["total"]*100,2)}% {round(time.time()-start, 2)} s")
 
-#def remove_package(package_name):
-#    print(f"Removing {package_name}...")
+
 
 def main():
     parser = argparse.ArgumentParser(description="Command Line Flashcard Tool")
@@ -127,10 +127,6 @@ def main():
 
         choice(input_file)
     
-
-
-    #elif args.command == 'remove':
-    #    remove_package(args.file)
 
 if __name__ == "__main__":
     main()
