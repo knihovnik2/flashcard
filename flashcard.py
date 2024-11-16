@@ -20,11 +20,15 @@ def practice(file_name):
     cards.pop(0)
     cards.pop()
     
-    stats = {"correct": 0, "total": len(cards)}
+    stats = {"correct": 0, "total": 0}
+
+    if config["limit"] == 0:
+        config["limit"] = len(cards)
 
     start = time.time()
-    for i in range(len(cards)):
+    for i in range(config["limit"]):
         current = cards.pop(ri(0,len(cards)-1))
+        stats["total"] += 1
 
         if current[0][-1] == "?":
             answer = input(f"{current[0]} ")
@@ -63,10 +67,13 @@ def choice(file_name):
     cards.pop(0)
     cards.pop()
     
-    stats = {"correct": 0, "total": len(cards)}
+    stats = {"correct": 0, "total": 0}
+
+    if config["limit"] == 0:
+        config["limit"] = len(cards)
 
     start = time.time()
-    for i in range(len(cards)):
+    for i in range(config["limit"]):
         current = cards.pop(ri(0,len(cards)-1))
         
         letters = config["quiz_option_markers"]
@@ -96,6 +103,9 @@ def main():
     # Adding a positional argument for the file name
     parser.add_argument("file", type=str, help="The name of the file")
     
+    # Allows you to set a limit on how many you want to practice
+    parser.add_argument("--limit", type=int, default=0, help="Limit of flashcards shown")
+
     # Parse the arguments
     args = parser.parse_args()
 
@@ -106,6 +116,7 @@ def main():
     config = {}
     for i in config_read:
         config[i.split("=")[0]] = i.split("=")[1]
+    config["limit"] = args.limit
     
     # Handle the command
     if args.command == "practice":
