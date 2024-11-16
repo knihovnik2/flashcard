@@ -75,6 +75,7 @@ def choice(file_name):
     start = time.time()
     for i in range(config["limit"]):
         current = cards.pop(ri(0,len(cards)-1))
+        stats["total"] += 1
         
         letters = config["quiz_option_markers"]
 
