@@ -1,0 +1,4 @@
+EXAMPLE;
+What is the capital of Germany?,Berlin;
+How tall is Mt. Everest? (rounded to nearest 10),8850;
+Who was the first American president?,George Washington;
