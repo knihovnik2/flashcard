@@ -4,4 +4,7 @@ Flashcard is a command line flashcard app.
 
 ## Installation
 
-just clone the repo or whatever
+Simply clone this github repository and you're good to go.
+
+```bash
+git clone https://github.com/knihovnik2/flashcard
