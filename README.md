@@ -26,5 +26,6 @@ If you have a choice quiz, you can it using
 
 or using
 
-```
+```bash
 ./flashcard.py abcd "file"
+```
